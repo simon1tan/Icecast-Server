@@ -71,12 +71,13 @@ format_type_t format_get_type (const char *contenttype)
         return FORMAT_TYPE_EBML;
     else if(strcmp(contenttype, "video/x-matroska-3d") == 0)
         return FORMAT_TYPE_EBML;
-    else
+    else{
         /* We default to the Generic format handler, which
            can handle many more formats than just mp3.
            Let's warn that this is not well supported */
-        ICECAST_LOG_WARN("Unsupported or legacy stream type: \"%s\". Falling back to generic minimal handler for best effort.", contenttype);
+        ICECAST_LOG_INFO("Unsupported or legacy stream type: \"%s\". Falling back to generic minimal handler for best effort.", contenttype);
         return FORMAT_TYPE_GENERIC;
+    }
 }
 
 int format_get_plugin(format_type_t type, source_t *source)
